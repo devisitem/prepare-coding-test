@@ -8,6 +8,7 @@ import java.util.StringTokenizer;
 public class DynamicProgramming {
 
     static int [] fibo_memo;
+    static int [] fiboArray1;
 
     public static void calfibo() {
 
@@ -38,7 +39,7 @@ public class DynamicProgramming {
     public static void practiceDP1() throws Exception {
         BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
         StringTokenizer tokenizer = new StringTokenizer(reader.readLine());
-
+        // 7 3 10 5 20 1 10 1 20 2 15 4 40 2 200
         int N = Integer.parseInt(tokenizer.nextToken());
         int [] T = new int[N];
         int [] P = new int[N];
@@ -66,5 +67,8 @@ public class DynamicProgramming {
         }
         System.out.println(dp[N]);
     }
+
+
+
 
 }
