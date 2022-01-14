@@ -2,8 +2,7 @@ package dp;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
-import java.util.Scanner;
-import java.util.StringTokenizer;
+import java.util.*;
 
 public class DynamicProgramming {
 
@@ -69,6 +68,41 @@ public class DynamicProgramming {
     }
 
 
+    public static void carryForCargo() throws Exception {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        StringTokenizer tokenizer = new StringTokenizer(br.readLine());
 
+        // 8 1 3 5 2 7 4 4
+        int N = Integer.parseInt(tokenizer.nextToken());
+
+        List<Integer> list = new ArrayList<>();
+        List<Integer> count = new ArrayList<>();
+        while (tokenizer.hasMoreTokens()) {
+            list.add(Integer.parseInt(tokenizer.nextToken()));
+        }
+
+        int binIndex = 0;
+        for(int i = 0; i < list.size();i++) {
+            int max = N;
+            if(count.size() == 0) count.add(0);
+            for(int j = binIndex;j < count.size();j++) {
+                int remain = N - count.get(j);
+                if(remain >= list.get(i)) {
+                    count.set(j, count.get(j) + list.get(i));
+                    binIndex = (count.size() - 1);
+                } else if(remain < list.get(i)) {
+                    count.add(list.get(i));
+                    binIndex = (count.size() - 1);
+                    break;
+                }
+            }
+
+            String listString = Arrays.toString(list.toArray());
+            String countString = Arrays.toString(count.toArray());
+            System.out.printf(" i = %d list: %s, count: %s", i, listString, countString);
+            System.out.println();
+        }
+
+    }
 
 }

@@ -7,10 +7,10 @@ public class Main {
 
     public static void main(String[] args) throws Exception {
 //        DynamicProgramming.calfibo();
-        ChargeWithDP.start();
+//        ChargeWithDP.start();
 //        DynamicProgramming.practiceDP1();
 //        DynamicProgramming.practice1();
-
+        DynamicProgramming.carryForCargo();
     }
 
 
