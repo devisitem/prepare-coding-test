@@ -73,20 +73,20 @@ public class DynamicProgramming {
         StringTokenizer tokenizer = new StringTokenizer(br.readLine());
 
         // 8 1 3 5 2 7 4 4
-        int N = Integer.parseInt(tokenizer.nextToken());
+        float N = Float.parseFloat(tokenizer.nextToken());
 
-        List<Integer> list = new ArrayList<>();
-        List<Integer> count = new ArrayList<>();
+        List<Float> list = new ArrayList<>();
+        List<Float> count = new ArrayList<>();
         while (tokenizer.hasMoreTokens()) {
-            list.add(Integer.parseInt(tokenizer.nextToken()));
+            list.add(Float.parseFloat(tokenizer.nextToken()));
         }
 
         int binIndex = 0;
         for(int i = 0; i < list.size();i++) {
-            int max = N;
-            if(count.size() == 0) count.add(0);
+            float max = N;
+            if(count.size() == 0) count.add(0.0f);
             for(int j = binIndex;j < count.size();j++) {
-                int remain = N - count.get(j);
+                float remain = N - count.get(j);
                 if(remain >= list.get(i)) {
                     count.set(j, count.get(j) + list.get(i));
                     binIndex = (count.size() - 1);

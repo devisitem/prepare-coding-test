@@ -2,6 +2,10 @@ package dp.bj;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.StringTokenizer;
 
 public class Example {
 
@@ -46,4 +50,59 @@ public class Example {
         System.out.println(dp[N]);
     }
 
+    /**
+     * <b>문제</b>
+     * <hr>
+     * <p>보물 수집가 태구는 고대사원에서 보물을 훔쳐 집으로 돌아가는길에 아주 약해보이는 외나무 다리를 건너야 하는 상황을 마주했습니다.</p>
+     * <p>외나무 다리는 한번에 68키로의 무게 밖에 견딜수 없기에 60키로인 태구는 가지고 있는 짐들의 무게를 계산하여 최소한의 이동으로 보물들을 옮기려합니다.</p>
+     * <p>예를들어, 보물의 무게가 list [1, 3, 5, 2, 7, 4, 4]에 각각 있을때 최대 추가 되는 무게 N 8이 주어질때 태구가 최소 몇번의 이동으로 보물을 모두 옮길수 있는지 작성합니다.</p>
+     * <hr>
+     * <p>입력값 예: 8 1 3 5 2 7 4 4</p>
+     * <p>출력값 예: 4 [3, 5],[1, 7],[2],[4, 4]</p>
+     * @throws Exception
+     */
+    public static void carryForCargo() throws Exception {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        StringTokenizer tokenizer = new StringTokenizer(br.readLine());
+        // 8 1 3 5 2 7 4 4
+
+        float N = Float.parseFloat(tokenizer.nextToken());
+
+        List<Float> list = new ArrayList<>();
+        List<Float> count = new ArrayList<>();
+        while (tokenizer.hasMoreTokens()) {
+            list.add(Float.parseFloat(tokenizer.nextToken()));
+        }
+
+        int binIndex = 0;
+        for(int i = 0; i < list.size();i++) {
+            float max = N;
+            if(count.size() == 0) count.add(0.0f);
+            for(int j = binIndex;j < count.size();j++) {
+                float remain = N - count.get(j);
+                if(remain >= list.get(i)) {
+                    count.set(j, count.get(j) + list.get(i));
+                    binIndex = (count.size() - 1);
+                } else if(remain < list.get(i)) {
+                    count.add(list.get(i));
+                    binIndex = (count.size() - 1);
+                    break;
+                }
+            }
+
+            String listString = Arrays.toString(list.toArray());
+            String countString = Arrays.toString(count.toArray());
+            System.out.printf(" i = %d list: %s, count: %s", i, listString, countString);
+            System.out.println();
+        }
+
+    }
+
+    /**
+     * 돌다리 건너기
+     * @throws Exception
+     */
+    public static void jumpAndJump() throws Exception {
+
+    }
 }

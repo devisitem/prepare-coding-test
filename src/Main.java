@@ -1,5 +1,6 @@
 import dp.ChargeWithDP;
 import dp.DynamicProgramming;
+import dp.bj.Example;
 
 import java.util.Scanner;
 
@@ -10,7 +11,8 @@ public class Main {
 //        ChargeWithDP.start();
 //        DynamicProgramming.practiceDP1();
 //        DynamicProgramming.practice1();
-        DynamicProgramming.carryForCargo();
+//        DynamicProgramming.carryForCargo();
+        Example.deliveryForSugar();
     }
 
 
