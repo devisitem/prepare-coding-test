@@ -12,7 +12,8 @@ public class Main {
 //        DynamicProgramming.practiceDP1();
 //        DynamicProgramming.practice1();
 //        DynamicProgramming.carryForCargo();
-        Example.deliveryForSugar();
+//        Example.deliveryForSugar();
+        Example.lint();
     }
 
 

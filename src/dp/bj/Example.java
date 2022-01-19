@@ -2,10 +2,7 @@ package dp.bj;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.StringTokenizer;
+import java.util.*;
 
 public class Example {
 
@@ -103,6 +100,39 @@ public class Example {
      * @throws Exception
      */
     public static void jumpAndJump() throws Exception {
+        Scanner scan = new Scanner(System.in);
+        int x = scan.nextInt();
+
+        String num = String.valueOf(x);
+        int result = 0;
+        for(int i = 0;i < num.length();i++) {
+            result += (num.charAt(i)) - 48;
+        }
+
+        if(x % result == 0) {
+            System.out.println("ㅎㅏ샤드 수 " + x);
+        }
+    }
+    public static void lint() {
+        int N = 5;
+        int stages [] = {2, 1, 2, 6, 2, 4, 3, 3};
+        int result [] = new int [N + 2];
+
+
+
+        for(int i = 0;i < stages.length;i++) {
+            result[stages[i]]++;
+        }
+        int people = stages.length;
+
+        for(int i = 0;i < N;i++) {
+            people -= result[i];
+            int failure = result[i+1] / people ;
+            System.out.printf("int %d = %d / %d ",failure, result[i+1], people);
+            System.out.println();
+        }
+
+        System.out.println(Arrays.toString(result));
 
     }
 }
