@@ -96,10 +96,10 @@ public class Example {
     }
 
     /**
-     * 돌다리 건너기
+     * 하샤드수
      * @throws Exception
      */
-    public static void jumpAndJump() throws Exception {
+    public static void harshadNumber() throws Exception {
         Scanner scan = new Scanner(System.in);
         int x = scan.nextInt();
 
@@ -113,7 +113,10 @@ public class Example {
             System.out.println("ㅎㅏ샤드 수 " + x);
         }
     }
-    public static void lint() {
+
+
+
+    public static void saveFailureLate() {
         int N = 5;
         int stages [] = {2, 1, 2, 6, 2, 4, 3, 3};
         int result [] = new int [N + 2];
@@ -127,8 +130,8 @@ public class Example {
 
         for(int i = 0;i < N;i++) {
             people -= result[i];
-            int failure = result[i+1] / people ;
-            System.out.printf("int %d = %d / %d ",failure, result[i+1], people);
+            float failure = ((float) result[i+1]) / ((float) people);
+            System.out.printf("int %1.1f = %d / %d ",failure, result[i+1], people);
             System.out.println();
         }
 

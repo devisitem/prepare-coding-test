@@ -13,7 +13,8 @@ public class Main {
 //        DynamicProgramming.practice1();
 //        DynamicProgramming.carryForCargo();
 //        Example.deliveryForSugar();
-        Example.lint();
+        Example.saveFailureLate();
+
     }
 
 
