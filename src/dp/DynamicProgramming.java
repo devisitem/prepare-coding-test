@@ -49,15 +49,20 @@ public class DynamicProgramming {
         }
 
         int [] dp = new int[N + 1];
-
+        // T[] = [3, 5, 1, 1, 2, 4, 2]
+        // P[] = [10, 20, 10, 20, 15, 40, 200]
         for(int i = 0;i < N;i++) {
             System.out.println("i = " + i);
             /// i일에 시작했을때, T[i]일동안 하게될 경우 N일 이내에 끝나야함
             if(i + T[i] <= N) {
+                // dp[i + T[i]] i날에 맡은 상담이 종료되는 날의 수익이다. 따라서 종료된 후의 수익과,
+                // i일(i 전 일까지 수익 + i일 수익) 까지의 수익중 더큰값을 사용한다.
                 dp[i + T[i]] = Math.max(dp[i + T[i]], dp[i] + P[i]);
             }
 
             dp[i + 1] = Math.max(dp[i + 1], dp[i]);
+
+            System.out.print("dp[] :");
             for(int j = 0;j < dp.length;j++) {
                 System.out.print(dp[j] + " ");
             }

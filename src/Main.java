@@ -15,7 +15,8 @@ public class Main {
 //        DynamicProgramming.carryForCargo();
 //        Example.deliveryForSugar();
 //        Example.saveFailureLate();
-        Practice01.test01();
+//        Practice01.test01();
+        Example.leaveWork();
     }
 
 
