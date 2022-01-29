@@ -16,7 +16,8 @@ public class Main {
 //        Example.deliveryForSugar();
 //        Example.saveFailureLate();
 //        Practice01.test01();
-        Example.leaveWork();
+//        Example.leaveWork();
+        Example.nonFinishedPlayer();
     }
 
 

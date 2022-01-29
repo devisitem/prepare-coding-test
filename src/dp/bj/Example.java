@@ -4,6 +4,8 @@ import java.io.BufferedReader;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.*;
+import java.util.function.Function;
+import java.util.stream.Collectors;
 
 public class Example {
 
@@ -60,7 +62,6 @@ public class Example {
      * @throws Exception
      */
     public static void carryForCargo() throws Exception {
-        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         StringTokenizer tokenizer = new StringTokenizer(br.readLine());
         // 8 1 3 5 2 7 4 4
 
@@ -175,13 +176,13 @@ public class Example {
      *         </tr>
      *         <tr>
      *             <th>P[i]</th>
-     *             <th>[3]</th>
-     *             <th>[5]</th>
-     *             <th>[1]</th>
-     *             <th>[1]</th>
-     *             <th>[2]</th>
-     *             <th>[4]</th>
-     *             <th>[2]</th>
+     *             <th>[10]</th>
+     *             <th>[20]</th>
+     *             <th>[10]</th>
+     *             <th>[20]</th>
+     *             <th>[15]</th>
+     *             <th>[40]</th>
+     *             <th>[200]</th>
      *         </tr>
      *     </tbody>
      * </table>
@@ -200,18 +201,46 @@ public class Example {
      */
     public static void leaveWork() throws Exception {
         // 7 3 10 5 20 1 10 1 20 2 15 4 40 2 200
-        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        StringTokenizer tokenizer = new StringTokenizer(br.readLine());
+        Scanner scanner = new Scanner(System.in);
 
-        final int N = Integer.parseInt(tokenizer.nextToken());
+        final int N = scanner.nextInt();
 
-        int [] T = new int[N];
-        int [] P = new int[N];
+        int [] T = new int[N + 5];
+        int [] P = new int[N + 5];
 
         for(int i = 0; i < N;i++) {
-            T[i] = Integer.parseInt(tokenizer.nextToken());
-            P[i] = Integer.parseInt(tokenizer.nextToken());
+            T[i] = scanner.nextInt();
+            P[i] = scanner.nextInt();
         }
+
+        int [] dp = new int [N + 5];
+
+        for(int i = 0;i < N;i++) {
+            if((i + T[i]) < (N + 1)) {
+                dp[i + T[i]] = Math.max(dp[i + T[i]], P[i] + dp[i]);
+            }
+
+            dp[i + 1] = Math.max(dp[i + 1], dp[i]);
+
+            System.out.printf("(%d) %s", i , Arrays.toString(dp));
+            System.out.println();
+        }
+
+    }
+
+    public static void nonFinishedPlayer() throws Exception {
+        String [] participant= {"marina", "josipa", "nikola", "nikola", "vinko", "filipa"};
+        String [] completion = {"josipa", "filipa", "marina", "nikola", "nikola"};
+
+        Map<String, Long> collect = Arrays.stream(participant).collect(Collectors.groupingBy(Function.identity(), Collectors.counting()));
+
+        for (int i = 0; i < completion.length; i++) {
+            if(collect.get(completion[i]) < 1) {
+
+            }
+        }
+
+        System.out.println("collect = " + collect);
 
 
     }
