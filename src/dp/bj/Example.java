@@ -227,21 +227,4 @@ public class Example {
         }
 
     }
-
-    public static void nonFinishedPlayer() throws Exception {
-        String [] participant= {"marina", "josipa", "nikola", "nikola", "vinko", "filipa"};
-        String [] completion = {"josipa", "filipa", "marina", "nikola", "nikola"};
-
-        Map<String, Long> collect = Arrays.stream(participant).collect(Collectors.groupingBy(Function.identity(), Collectors.counting()));
-
-        for (int i = 0; i < completion.length; i++) {
-            if(collect.get(completion[i]) < 1) {
-
-            }
-        }
-
-        System.out.println("collect = " + collect);
-
-
-    }
 }
