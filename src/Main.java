@@ -1,9 +1,4 @@
-import dp.ChargeWithDP;
-import dp.DynamicProgramming;
-import dp.bj.Example;
-import dp.programmers.Practice01;
-
-import java.util.Scanner;
+import dp.bj.TestHash;
 
 public class Main {
 
@@ -17,7 +12,8 @@ public class Main {
 //        Example.saveFailureLate();
 //        Practice01.test01();
 //        Example.leaveWork();
-        Example.nonFinishedPlayer();
+//        TestHash.phoneNumberList();
+        TestHash.camouflage();
     }
 
 
