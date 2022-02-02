@@ -7,6 +7,7 @@ import java.util.stream.Collector;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
+import static dp.programmers.Music.sum;
 import static java.util.stream.Collectors.*;
 
 public class TestHash {
@@ -344,9 +345,12 @@ public class TestHash {
             musics.add(new Music(i, plays[i], genres[i]));
         }
 
-        musics.stream().collect(groupingBy(Music::getGenre))
-                .entrySet().stream();
+        int[] ints = musics.stream().collect(groupingBy(Music::getGenre))
+                .entrySet().stream().sorted((a, b) -> sum(b.getValue()) - sum(a.getValue()))
+                .flatMap(x -> x.getValue().stream().sorted().limit(2))
+                .mapToInt(x -> x.getId()).toArray();
 
+        System.out.println(Arrays.toString(ints));
     }
 
 }
@@ -365,6 +369,7 @@ class Music implements Comparable<Music> {
 
     @Override
     public int compareTo(Music another) {
+        System.out.println("컴페얼 투 호출");
         if(this.played == another.played) {
             return (this.id == another.id) ? 0 : (this.id > another.id ? 1 : -1);
         }
@@ -385,8 +390,19 @@ class Music implements Comparable<Music> {
         return this.genre;
     }
 
+    public int getPlayed() {
+        return this.played;
+    }
 
-    private int sum(List<Music> group) {
-        return 0;
+    public int getId() {
+        return this.id;
+    }
+
+    public static int sum(List<Music> group) {
+        int answer = 0;
+        for(Music music : group) {
+            answer += music.played;
+        }
+        return answer;
     }
 }
