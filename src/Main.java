@@ -1,4 +1,4 @@
-import dp.bj.TestHash;
+import dp.programmers.TestHash;
 
 public class Main {
 
@@ -13,7 +13,8 @@ public class Main {
 //        Practice01.test01();
 //        Example.leaveWork();
 //        TestHash.phoneNumberList();
-        TestHash.camouflage();
+//        TestHash.camouflage();
+        TestHash.bestAlbum();
     }
 
 
