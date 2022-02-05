@@ -1,3 +1,4 @@
+import bit_operator.BitOperation;
 import sort.selection_sort.SelectionSort;
 
 public class Main {
@@ -15,8 +16,13 @@ public class Main {
 //        TestHash.phoneNumberList();
 //        TestHash.camouflage();
 //        TestHash.bestAlbum();
-        int [] needSort = {1, 4, 7, 3, 2, 5};
-        SelectionSort.selectionSort(needSort);
+//        int [] needSort = {1, 4, 7, 3, 2, 5};
+//        SelectionSort.selectionSort(needSort);
+//        BitOperation.andOperation();
+//        BitOperation.orOperation();
+//        BitOperation.xOrOperation();
+//        BitOperation.notOperation();
+        BitOperation.shiftOperation();
     }
 
 
