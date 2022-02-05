@@ -1,13 +1,10 @@
-package dp.programmers;
+package programmers;
 
-import java.lang.reflect.Array;
 import java.util.*;
 import java.util.function.Function;
-import java.util.stream.Collector;
 import java.util.stream.Collectors;
-import java.util.stream.IntStream;
 
-import static dp.programmers.Music.sum;
+import static programmers.Music.sum;
 import static java.util.stream.Collectors.*;
 
 public class TestHash {

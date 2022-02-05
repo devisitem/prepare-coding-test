@@ -1,4 +1,4 @@
-import dp.programmers.TestHash;
+import sort.selection_sort.SelectionSort;
 
 public class Main {
 
@@ -14,7 +14,9 @@ public class Main {
 //        Example.leaveWork();
 //        TestHash.phoneNumberList();
 //        TestHash.camouflage();
-        TestHash.bestAlbum();
+//        TestHash.bestAlbum();
+        int [] needSort = {1, 4, 7, 3, 2, 5};
+        SelectionSort.selectionSort(needSort);
     }
 
 
