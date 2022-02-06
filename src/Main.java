@@ -1,4 +1,5 @@
 import bit_operator.BitOperation;
+import programmers.TestStackAndQueue;
 import sort.selection_sort.SelectionSort;
 
 public class Main {
@@ -18,11 +19,15 @@ public class Main {
 //        TestHash.bestAlbum();
 //        int [] needSort = {1, 4, 7, 3, 2, 5};
 //        SelectionSort.selectionSort(needSort);
+//        BitOperation.dropTheBit();
 //        BitOperation.andOperation();
 //        BitOperation.orOperation();
 //        BitOperation.xOrOperation();
 //        BitOperation.notOperation();
-        BitOperation.shiftOperation();
+//        BitOperation.shiftOperation();
+//        TestStackAndQueue.developForFeature();
+//        TestStackAndQueue.printer();
+        TestStackAndQueue.truckOnBridge();
     }
 
 
