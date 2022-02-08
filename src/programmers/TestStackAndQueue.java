@@ -1,7 +1,9 @@
 package programmers;
 
 import java.util.*;
+import java.util.function.Function;
 import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 import java.util.stream.Stream;
 
 public class TestStackAndQueue {
@@ -283,56 +285,68 @@ public class TestStackAndQueue {
      *
      */
     public static void truckOnBridge() {
-        int bridge_length = 100;
-        int weight = 100;
-        int [] truck_weights = {10};
+        int bridge_length = 2;
+        int weight = 10;
+        int [] truck_weights = {7,4,5,6};
 
         int answer = 0;
-        Queue<Integer> queue = new LinkedList<>();
         int totalWeight = 0;
+        Queue<Integer> queue = new LinkedList<>();
+
         for(int i = 0;i < truck_weights.length;i++) {
-            queue.offer(truck_weights[i]);
-            totalWeight += truck_weights[i];
-        }
+            int truck = truck_weights[i];
 
-        int currentWeight = 0;
-        int [] bridge = new int[bridge_length];
-        while(totalWeight > 0) {
-            Integer peek = queue.peek();
-            if(peek == null) {
-                peek = 0;
-            }
-            if((currentWeight + peek.intValue()) <= weight) {
-                int next = peek != 0 ? queue.poll().intValue() : peek;
+            while(true) {
 
-                totalWeight -= goBridge(bridge, next);
-                currentWeight += next;
-                answer++;
-            } else {
-                int next = 0;
-                if((currentWeight - bridge[0]) + peek <= weight) {
-                    next = queue.poll().intValue();
-                    currentWeight += next;
+                if(queue.isEmpty()) {
+                    queue.offer(truck);
+                    totalWeight += truck;
+                    answer++;
+                    break;
+                } else if(queue.size() == bridge_length) {
+
+                    totalWeight -= queue.poll().intValue();
+                } else {
+                    if(totalWeight + truck <= weight) {
+                        queue.offer(truck);
+                        totalWeight += truck;
+                        answer++;
+                        break;
+                    } else {
+                        queue.offer(0);
+                        answer++;
+                    }
                 }
-                int exit = goBridge(bridge, next);
-                totalWeight -= exit;
-                currentWeight -= exit;
-                answer++;
             }
         }
+        answer += bridge_length;
         System.out.println("answer = " + answer);
     }
 
-    public static int goBridge(int [] bridge, int newTruck) {
-        int last = bridge[0];
-        for (int i = 0; i < bridge.length - 1; i++) {
-             bridge[i] = bridge[i + 1];
+    public static void priceOfStock() {
+        int [] prices = {1, 2, 3, 2, 3};
+        int [] answer = new int [prices.length];
+        Queue<Integer> queue = new LinkedList<>();
+
+        for(int i = 0;i < prices.length;i++) {
+            queue.offer(prices[i]);
         }
 
-        bridge[bridge.length - 1] = newTruck;
-        return last;
+        int index = 1;
+        while( ! queue.isEmpty()) {
+            int price = queue.poll().intValue();
+            int retain = 0;
+            for(int i = index;i < prices.length;i++) {
+                if(price > prices[i]) {
+                    break;
+                }
+                retain++;
+                answer[index] = retain;
+            }
+            index++;
+        }
+        System.out.println("answer = " + Arrays.toString(answer));
     }
-
 }
 
 class Print {

@@ -27,7 +27,8 @@ public class Main {
 //        BitOperation.shiftOperation();
 //        TestStackAndQueue.developForFeature();
 //        TestStackAndQueue.printer();
-        TestStackAndQueue.truckOnBridge();
+//        TestStackAndQueue.truckOnBridge();
+        TestStackAndQueue.priceOfStock();
     }
 
 
