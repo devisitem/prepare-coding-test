@@ -1,3 +1,4 @@
+import bfs.BfsTest;
 import bit_operator.BitOperation;
 import programmers.TestStackAndQueue;
 import sort.selection_sort.SelectionSort;
@@ -28,8 +29,10 @@ public class Main {
 //        TestStackAndQueue.developForFeature();
 //        TestStackAndQueue.printer();
 //        TestStackAndQueue.truckOnBridge();
-        TestStackAndQueue.priceOfStock();
+//        TestStackAndQueue.priceOfStock();
+        BfsTest.bfsAsList();
     }
+
 
 
 }
