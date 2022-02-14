@@ -29,8 +29,9 @@ public class Main {
 //        TestStackAndQueue.developForFeature();
 //        TestStackAndQueue.printer();
 //        TestStackAndQueue.truckOnBridge();
-//        TestStackAndQueue.priceOfStock();
-        BfsTest.bfsAsList();
+        TestStackAndQueue.priceOfStock();
+//        BfsTest.bfsAsList();
+//        BfsTest.bfsWithNumber();
     }
 
 

@@ -326,26 +326,28 @@ public class TestStackAndQueue {
     public static void priceOfStock() {
         int [] prices = {1, 2, 3, 2, 3};
         int [] answer = new int [prices.length];
-        Queue<Integer> queue = new LinkedList<>();
+        Queue<Node> queue = new LinkedList<>();
 
         for(int i = 0;i < prices.length;i++) {
-            queue.offer(prices[i]);
+            queue.offer(new Node(i, prices[i]));
         }
 
-        int index = 1;
-        while( ! queue.isEmpty()) {
-            int price = queue.poll().intValue();
-            int retain = 0;
-            for(int i = index;i < prices.length;i++) {
-                if(price > prices[i]) {
-                    break;
-                }
-                retain++;
-                answer[index] = retain;
-            }
-            index++;
+        for(int i = 0;i < prices.length;i++) {
+            int price = prices[i];
+
+
         }
+
+
         System.out.println("answer = " + Arrays.toString(answer));
+    }
+    static class Node {
+        int index;
+        int value;
+        Node(int index, int value) {
+            this.index = index;
+            this.value = value;
+        }
     }
 }
 

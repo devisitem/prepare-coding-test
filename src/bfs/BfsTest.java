@@ -1,5 +1,6 @@
 package bfs;
 
+import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.Queue;
 import java.util.Scanner;
@@ -17,6 +18,7 @@ public class BfsTest {
         System.out.println("bfs = " + bfs);
 
     }
+
     static String bfs(int start, int [][] graph, boolean [] visited) {
         StringBuilder builder = new StringBuilder();
 
@@ -41,4 +43,32 @@ public class BfsTest {
 
         return builder.toString();
     }
+
+    public static void bfsWithNumber() {
+        int [] password = {3, 1, 4, 7, 9, 2, 8, 6, 5};
+        int [][] array = {{},
+                {2, 4, 5}, {1, 3, 4, 5, 6}, {2, 5, 6},
+                {1, 2, 5, 7, 8}, {1, 2, 3, 4, 6, 7, 8, 9}, {2, 3, 5, 8, 9},
+                {4, 5, 8}, {4, 5, 6, 7, 9}, {5, 6, 8}};
+        boolean [] visited = new boolean[array.length];
+        Queue<Integer> q = new LinkedList<>();
+
+
+            q.offer(1);
+            visited[1] = true;
+            while( ! q.isEmpty()) {
+                int nodeIndex = q.poll();
+                System.out.print(nodeIndex+ " -> ");
+                for(int i = 0;i < array[nodeIndex].length;i++) {
+                    int temp = array[nodeIndex][i];
+
+                    if( ! visited[temp]) {
+                        visited[temp] = true;
+                        q.offer(temp);
+                    }
+                }
+            }
+
+    }
+
 }
