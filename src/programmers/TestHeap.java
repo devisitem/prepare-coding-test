@@ -1,6 +1,9 @@
 package programmers;
 
-import java.util.PriorityQueue;
+import java.util.*;
+import java.util.stream.Collectors;
+
+import static java.util.Collections.reverse;
 
 public class TestHeap {
 
@@ -50,28 +53,95 @@ public class TestHeap {
      *
      */
     public static void moreSpicy() {
-        int [] scoville = {1, 2, 3, 9, 10 ,12};
+        int [] scoville = {1, 2, 4, 3, 4, 3, 9, 10 ,12};
         final int K = 7;
-        int answer = 0;
-        PriorityQueue<Integer> heap = new PriorityQueue<>();
+        int answer = solutionOfSpicy(scoville, K);
 
-        for(int e : scoville) {
-            heap.offer(e);
+        System.out.println("answer = " + answer);
+
+    }
+
+    public static int solutionOfSpicy(int [] scoville, int K) {
+        PriorityQueue<Integer> heap = new PriorityQueue<>(Arrays.stream(scoville)
+                .mapToObj(Integer::valueOf).collect(Collectors.toList()));
+        int answer = 0;
+        while( ! heap.isEmpty()) {
+
+            if(heap.size() <= 1 && heap.peek() < K) {
+                return -1;
+            }
+            Integer first = heap.poll();
+
+            if(first < K) {
+                Integer second = heap.poll();
+                Integer result = first + (second * 2);
+                heap.offer(result);
+                answer++;
+            }else {
+                break;
+            }
+            System.out.println("heap = " + heap+", answer = " + answer);
         }
 
-        while(heap.peek() <= K) {
-            if(heap.size() == 1) {
-                answer = -1;
+        return answer;
+    }
+
+    public static void diskController() {
+        int [][] jobs = {{0, 3}, {1, 9}, {2, 6}};
+
+        int answer = solutionOfDisk(jobs);
+
+        System.out.println("answer = " + answer);
+    }
+
+    static int solutionOfDisk(int [][] jobs) {
+        int answer = 0;
+
+        PriorityQueue<DiskJob> heap = new PriorityQueue<>(Arrays.stream(jobs).map(p ->
+                new DiskJob(p[0], p[1])).collect(Collectors.toList()));
+
+        int time = 0;
+        int total = 0;
+        while(! heap.isEmpty()) {
+            DiskJob job = heap.poll();
+            System.out.println("job = " + job);
+            int temp = 0;
+            if(total != 0) {
+                temp = total - job.req + job.time;
+            } else {
+                temp = job.time;
             }
 
-            int a = heap.poll();
-            int b = heap.poll();
+            time += temp;
+            total += job.time;
+        }
+        answer = (int) Math.floor(time / (float) jobs.length);
+        return answer;
+    }
 
-            int result = a + (b * 2);
+    static class DiskJob implements Comparable {
+        int req;
+        int time;
 
-            heap.offer(result);
-            answer++;
+        DiskJob (int req, int time) {
+            this.req = req;
+            this.time = time;
         }
 
+        @Override
+        public int compareTo(Object o) {
+            if( ! (o instanceof DiskJob)) {
+                throw new ClassCastException();
+            }
+            DiskJob another = (DiskJob) o;
+            if(this.req == another.req)
+                return this.time - another.time;
+            return this.req - another.req;
+        }
+
+        @Override
+        public String toString() {
+            return String.format("{\"req\": %d, \"time\": %d}", this.req, this.time);
+        }
     }
 }
