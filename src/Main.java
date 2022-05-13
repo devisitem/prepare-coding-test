@@ -1,5 +1,6 @@
 import bfs.BfsTest;
 import bit_operator.BitOperation;
+import programmers.TestFirstSearch;
 import programmers.TestHeap;
 import programmers.TestStackAndQueue;
 import sort.merge_sort.MergeSort;
@@ -36,7 +37,8 @@ public class Main {
 //        BfsTest.bfsWithNumber();
 //        MergeSort.startMergeSort();
 //        TestHeap.moreSpicy();
-        TestHeap.diskController();
+//        TestHeap.diskController();
+        TestFirstSearch.targetNumber(new int []{1, 1, 1, 1, 1}, 3);
     }
 
 
