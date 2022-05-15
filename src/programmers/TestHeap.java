@@ -87,7 +87,7 @@ public class TestHeap {
     }
 
     public static void diskController() {
-        int [][] jobs = {{0, 3}, {1, 9}, {2, 6}, {4, 3}, {5, 1}, {6, 7}, {30 ,4}};
+        int [][] jobs = {{0, 3}, {1, 2}, {2, 2}, {3, 1}, {10, 2}};
 
         int answer = solutionOfDisk(jobs);
 
@@ -99,14 +99,21 @@ public class TestHeap {
         PriorityQueue<DiskJob> heap = new PriorityQueue<>();
         Queue<DiskJob> sortedJobs = new LinkedList<>(Arrays.stream(jobs).sorted((o1, o2) -> o1[0] - o2[0]).map(a -> new DiskJob(a[0], a[1])).collect(Collectors.toList()));
 
+        while( ! sortedJobs.isEmpty() || ( ! heap.isEmpty())) {
 
-
-        while( ! sortedJobs.isEmpty()) {
-
-            DiskJob peek = sortedJobs.peek();
-            if(peek.req < proceedTime) {
-
+            if ((!sortedJobs.isEmpty()) && proceedTime <= sortedJobs.peek().req) {
+                DiskJob poll = sortedJobs.poll();
+                heap.offer(poll);
             }
+
+            while (( ! sortedJobs.isEmpty()) && proceedTime > sortedJobs.peek().req) {
+                DiskJob next = sortedJobs.poll();
+                heap.offer(next);
+            }
+            System.out.printf("(%d) sec - %s\n", proceedTime, heap.peek());
+            DiskJob poll = heap.poll();
+            totalProcessTime += proceedTime <= poll.req ? poll.time : (proceedTime - poll.req) + poll.time;
+            proceedTime += poll.time;
 
         }
 
