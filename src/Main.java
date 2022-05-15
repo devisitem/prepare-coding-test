@@ -37,8 +37,8 @@ public class Main {
 //        BfsTest.bfsWithNumber();
 //        MergeSort.startMergeSort();
 //        TestHeap.moreSpicy();
-//        TestHeap.diskController();
-        TestFirstSearch.targetNumber(new int []{1, 1, 1, 1, 1}, 3);
+        TestHeap.diskController();
+//        TestFirstSearch.targetNumber(new int []{1, 1, 1, 1, 1}, 3);
     }
 
 

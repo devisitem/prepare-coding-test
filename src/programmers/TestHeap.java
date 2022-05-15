@@ -87,7 +87,7 @@ public class TestHeap {
     }
 
     public static void diskController() {
-        int [][] jobs = {{0, 3}, {1, 9}, {2, 6}};
+        int [][] jobs = {{0, 3}, {1, 9}, {2, 6}, {4, 3}, {5, 1}, {6, 7}, {30 ,4}};
 
         int answer = solutionOfDisk(jobs);
 
@@ -95,27 +95,23 @@ public class TestHeap {
     }
 
     static int solutionOfDisk(int [][] jobs) {
-        int answer = 0;
+        int answer = 0, proceedTime = 0, totalProcessTime = 0;
+        PriorityQueue<DiskJob> heap = new PriorityQueue<>();
+        Queue<DiskJob> sortedJobs = new LinkedList<>(Arrays.stream(jobs).sorted((o1, o2) -> o1[0] - o2[0]).map(a -> new DiskJob(a[0], a[1])).collect(Collectors.toList()));
 
-        PriorityQueue<DiskJob> heap = new PriorityQueue<>(Arrays.stream(jobs).map(p ->
-                new DiskJob(p[0], p[1])).collect(Collectors.toList()));
 
-        int time = 0;
-        int total = 0;
-        while(! heap.isEmpty()) {
-            DiskJob job = heap.poll();
-            System.out.println("job = " + job);
-            int temp = 0;
-            if(total != 0) {
-                temp = total - job.req + job.time;
-            } else {
-                temp = job.time;
+
+        while( ! sortedJobs.isEmpty()) {
+
+            DiskJob peek = sortedJobs.peek();
+            if(peek.req < proceedTime) {
+
             }
 
-            time += temp;
-            total += job.time;
         }
-        answer = (int) Math.floor(time / (float) jobs.length);
+
+        answer = totalProcessTime / jobs.length;
+
         return answer;
     }
 
@@ -134,9 +130,12 @@ public class TestHeap {
                 throw new ClassCastException();
             }
             DiskJob another = (DiskJob) o;
-            if(this.req == another.req)
-                return this.time - another.time;
-            return this.req - another.req;
+
+            int orderTime = this.time - another.time;
+            if(orderTime == 0)
+                return this.req - another.req;
+
+            return orderTime;
         }
 
         @Override
