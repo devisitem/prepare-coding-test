@@ -6,6 +6,7 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Stack;
+import java.util.stream.Collectors;
 
 public class TestFirstSearch {
 
@@ -119,7 +120,31 @@ public class TestFirstSearch {
         });
     }
 
+    public static void optionTree(String[][] optionList) {
+        final Integer[] lengthList = Arrays.stream(optionList).map(arr -> arr.length).collect(Collectors.toList()).toArray(new Integer[0]);
+        final Integer numberOfCases = Arrays.stream(lengthList).reduce(Math::multiplyExact).get();
+        int curIdxList [] = new int [lengthList.length];
+        String [] optionTree = new String [numberOfCases + 1];
+        int depth = 0;
+
+        while (depth >= 0) {
+            if(curIdxList[depth] >= lengthList[depth]){
+                curIdxList[depth] = 0;
+                depth--;
+            }
+            int curRow = 0;
+            int curCol = 0;
+            while(curRow < lengthList.length && curCol < lengthList[lengthList.length - 1]) {
+
+                System.out.printf("[%sㅣ%sㅣ%sㅣ%s]\n", optionList[0][curIdxList[0]], optionList[1][curIdxList[1]], optionList[2][curIdxList[2]], optionList[3][curIdxList[3]]);
+            }
+
+
+            curIdxList[depth]++;
+        }
+    }
 }
+
 
 class Node {
     private int index;

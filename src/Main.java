@@ -37,8 +37,14 @@ public class Main {
 //        BfsTest.bfsWithNumber();
 //        MergeSort.startMergeSort();
 //        TestHeap.moreSpicy();
-        TestHeap.diskController();
+//        TestHeap.diskController();
 //        TestFirstSearch.targetNumber(new int []{1, 1, 1, 1, 1}, 3);
+        String [][] optionList = new String[][]{
+                {"1","2"},
+                {"a", "b", "c"},
+                {"가", "나"},
+                {"A", "B", "C", "D"}};
+        TestFirstSearch.optionTree(optionList);
     }
 
 

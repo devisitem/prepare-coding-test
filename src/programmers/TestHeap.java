@@ -3,8 +3,6 @@ package programmers;
 import java.util.*;
 import java.util.stream.Collectors;
 
-import static java.util.Collections.reverse;
-
 public class TestHeap {
 
     /**
@@ -87,9 +85,10 @@ public class TestHeap {
     }
 
     public static void diskController() {
-        int [][] jobs = {{0, 3}, {1, 2}, {2, 2}, {3, 1}, {10, 2}};
+        int [][] jobs = {{0, 3}, {1, 9}, {2 ,6}, {20, 1}, {2, 4}, {9, 1}, {7, 4}, {7, 12}, {64, 9}, {80, 4}};
 
-        int answer = solutionOfDisk(jobs);
+//        int answer = solutionOfDisk(jobs);
+        int answer = solution(jobs);
 
         System.out.println("answer = " + answer);
     }
@@ -101,26 +100,69 @@ public class TestHeap {
 
         while( ! sortedJobs.isEmpty() || ( ! heap.isEmpty())) {
 
-            if ((!sortedJobs.isEmpty()) && proceedTime <= sortedJobs.peek().req) {
-                DiskJob poll = sortedJobs.poll();
-                heap.offer(poll);
-            }
-
-            while (( ! sortedJobs.isEmpty()) && proceedTime > sortedJobs.peek().req) {
+            while (( ! sortedJobs.isEmpty()) && proceedTime >= sortedJobs.peek().req) {
                 DiskJob next = sortedJobs.poll();
                 heap.offer(next);
+//                System.out.printf("(%2d)sec    add   → %-25s heap -> %s\n", proceedTime, next, heap);
             }
-            System.out.printf("(%d) sec - %s\n", proceedTime, heap.peek());
+
+            if(( ! sortedJobs.isEmpty()) && heap.isEmpty() && proceedTime < sortedJobs.peek().req){
+                System.out.println("+1 sec");
+                proceedTime++;
+                continue;
+            }
+
             DiskJob poll = heap.poll();
+            System.out.printf("(%2d)sec selected → %-25s heap → %s\n", proceedTime, poll, heap);
             totalProcessTime += proceedTime <= poll.req ? poll.time : (proceedTime - poll.req) + poll.time;
             proceedTime += poll.time;
 
         }
-
-        answer = totalProcessTime / jobs.length;
+        System.out.println("total: " + totalProcessTime);
+        answer = (int) Math.floor(totalProcessTime / jobs.length);
 
         return answer;
     }
+
+    public static int solution(int [][] jobs) {
+        int answer = 0;
+        int end = 0; // 수행되고난 직후의 시간
+        int jobsIdx = 0; // jobs 배열의 인덱스
+        int count = 0; // 수행된 요청 갯수
+
+        // 원본 배열 오름차순 정렬 (요청시간 오름차순)
+        Arrays.sort(jobs, (o1, o2) -> o1[0] - o2[0]);
+
+        // 처리 시간 오름차순으로 정렬되는 우선순위 큐(Heap)
+        PriorityQueue<int[]> pq = new PriorityQueue<>((o1, o2) -> o1[1] - o2[1]);
+
+        // 요청이 모두 수행될 때까지 반복
+        while (count < jobs.length) {
+
+            // 하나의 작업이 완료되는 시점(end)까지 들어온 모든 요청을 큐에 넣음
+            while (jobsIdx < jobs.length && jobs[jobsIdx][0] <= end) {
+                pq.add(jobs[jobsIdx++]);
+            }
+
+            // 큐가 비어있다면 작업 완료(end) 이후에 다시 요청이 들어온다는 의미
+            // (end를 요청의 가장 처음으로 맞춰줌)
+            if (pq.isEmpty()) {
+                end = jobs[jobsIdx][0];
+
+                // 작업이 끝나기 전(end 이전) 들어온 요청 중 가장 수행시간이 짧은 요청부터 수행
+            } else {
+
+                int[] temp = pq.poll();
+                answer += temp[1] + end - temp[0];
+                end += temp[1];
+                count++;
+            }
+        }
+
+        System.out.println("total: " + answer);
+        return (int) Math.floor(answer / jobs.length);
+    }
+
 
     static class DiskJob implements Comparable {
         int req;
